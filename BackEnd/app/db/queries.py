@@ -86,3 +86,10 @@ def post_sms(userSms: str):
             message="Database insert failed!",
             data=[]
         )
+
+
+# def get_by_date(inDate:str):
+#     con = get_db_connection()
+#     cur = con.cursor()
+
+    

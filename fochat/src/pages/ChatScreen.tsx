@@ -13,31 +13,40 @@ interface Message {
   time: Date;
 }
 function ChatScreen() {
-  const dateHandler: Date = new Date();
+  const [dateHandler, setdateHandler] = useState<Date | null>(null);
+  const [dateIndex, setDateIndex] = useState<number>(0);
   const [message, setMessage] = useState<singleMessage[]>([]);
   useEffect(() => {
     const fetchMessages = async () => {
-      const response = await getMessages(0, 0);
+      const response = await getMessages(dateIndex, 0);
       console.log(response);
       if (response != null) {
-        setMessage(response)
+        setMessage(response.data)
+        setdateHandler(new Date(response.dataDate))
       }
 
     }
 
     fetchMessages();
-  }, []);
+  }, [dateIndex]);
 
 
   return (
     <div className="chatscreen-container">
-      <DateCard date={dateHandler.toDateString()} />
+      {dateHandler != null && (
+        <DateCard
+          date={dateHandler.toDateString()}
+          prevDate={() => setDateIndex(dateIndex + 1)}
+          nextDate={() => setDateIndex(dateIndex - 1)}
+        />
+      )}
+
       <div className="chatscreen-container-messages">
         {message.map((sms, index) => (
           <Message
             key={index}
             name={String(sms.id)}
-            color={"#000"}
+            color={"#FFF9E5"}
             sms={sms.sms}
             time={new Date(sms.created_at)}
           />

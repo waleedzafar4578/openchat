@@ -45,3 +45,48 @@ ul {
   height: 10%;
   border-radius: 2px;
 }
+
+.inputbar-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 0.2rem;
+  overflow: hidden;
+  border-radius: 15px;
+  background-color: #555879;
+}
+
+.input-bar {
+  border-right: 10px;
+  width: 90%;
+  /* height: 90%; */
+}
+
+input {
+  all: unset;
+  font-size: 25px;
+  color: #fff;
+}
+
+.inputbar-button {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 900;
+  padding: 10px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #98A1BC;
+}
+
+.inputbar-button-container {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}

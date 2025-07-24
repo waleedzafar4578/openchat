@@ -2,7 +2,7 @@ import './App.css';
 import DashboardIcon from './elements/DashboardIcon';
 import UserList from './elements/UserList';
 import ChatScreen from './pages/ChatScreen';
-
+import InputBar from './elements/InputBar';
 
 function App() {
   return (
@@ -30,8 +30,7 @@ function App() {
           <div className="right-container-top-right"></div>
         </div>
         <div className="right-container-bottom">
-          <div className="right-container-bottom-left"></div>
-          <div className="right-container-bottom-right"></div>
+            <InputBar />
         </div>
       </div>
     </div>

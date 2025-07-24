@@ -10,7 +10,7 @@ interface singleMessage{
 
 interface GetMessagesResponse {
   data: singleMessage[];
-  messages: string;
+  dataDate: any;
   status: Status;
 }
 

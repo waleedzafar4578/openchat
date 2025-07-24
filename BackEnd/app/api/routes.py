@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from app.db.queries import get_messages, post_sms
 from app.modules.APIResponse import APIResponse
-
+from app.utils.DateTime import camparedDate
 router = APIRouter()
 
 
@@ -9,7 +9,7 @@ router = APIRouter()
 async def fetch_messages(message_no: int, dateIndex: int):
     return APIResponse(
         status="success",
-        message="Data fetched",
+        dataDate=camparedDate(dateIndex),
         data=get_messages(message_no, dateIndex),
     )
 
