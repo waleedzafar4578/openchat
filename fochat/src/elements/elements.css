@@ -1,0 +1,47 @@
+/* ---- start of dashboard icon file ----- */
+
+.dashboard-icon-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-content: center;
+  overflow: hidden;
+  border-radius: 20px;
+  /* background-color: #fff; */
+}
+
+.dashboard-icon-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+
+
+
+.user-container {
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 95%;
+  width: 95%;
+  /* height: 100%; */
+  /* background-color: #fff; */
+  padding: 2px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.single-user {
+  width: 100%;
+  height: 10%;
+  border-radius: 2px;
+}

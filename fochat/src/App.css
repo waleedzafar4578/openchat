@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  /* background-color: #FE7743; */
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 10%;
+  /* padding: 0.6rem; */
+  /* border: 1px solid #D7D7D7; */
+  /* background: rgba(255, 45, 209, 0.9); */
+  /* backdrop-filter: blur(5px); */
+}
+
+.left-container-top {
+  display: flex;
+  flex: 0 0 80%;
+  /* border: 1px solid #D7D7D7; */
+  flex-direction: column;
+}
+
+.left-container-top-top {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex: 0 0 20%;
+  /* border: 1px solid #D7D7D7; */
+}
+
+.left-container-top-bottom {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  flex: 0 0 70%;
+  /* border: 1px solid #D7D7D7; */
+  /* background-color: #fff; */
+}
+
+.left-container-bottom {
+  display: flex;
+  flex: 0 0 15%;
+  /* border: 1px solid #D7D7D7; */
+  flex-direction: column;
+}
+
+.left-container-bottom-top {
+  display: flex;
+  flex: 0 0 50%;
+  /* border: 1px solid #D7D7D7; */
+}
+
+.left-container-bottom-bottom {
+  display: flex;
+  flex: 0 0 50%;
+  /* border: 1px solid #D7D7D7; */
+}
+
+.right-container {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 88%;
+  padding: 0.6rem;
+  /* border: 0.3px solid #D7D7D7; */
+  /* background-color: #447D9B; */
+}
+
+.right-container-top {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 90%;
+  /* border: 1px solid #D7D7D7; */
+
+}
+
+.right-container-top-left {
+  display: flex;
+  flex: 0 0 90%;
+  /* border: 1px solid #D7D7D7; */
+  /* background-color: rgb(99, 200, 255); */
+}
+
+.right-container-top-right {
+  display: flex;
+  flex: 0 0 10%;
+  /* border: 1px solid #D7D7D7; */
+
+}
+
+.right-container-bottom {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 10%;
+  /* border: 1px solid #D7D7D7; */
+  /* background-color: #FFCB61; */
+}
+
+.right-container-bottom-left {
+  display: flex;
+  flex: 0 0 80%;
+}
+
+.right-container-bottom-right {
+  display: flex;
+  flex: 0 0 20%;
+}
+
+
+/* * { */
+/* border: 1px solid #D7D7D7; */
+/* } */
