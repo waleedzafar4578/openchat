@@ -47,8 +47,10 @@ ul {
 }
 
 .inputbar-container {
-  height: 100%;
-  width: 100%;
+  position: absolute;
+  bottom: 3%;
+  height: 10%;
+  width: 90%;
   display: flex;
   padding: 0.2rem;
   overflow: hidden;

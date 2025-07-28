@@ -40,3 +40,39 @@ export const sendSms = async (userSms: string) => {
   }
   return null;
 }
+
+type Callback = (message: any) => void;
+let socket: WebSocket | null = null;
+
+export const connectWebSocket = (onMessage: Callback) => {
+  const wsUrl = url.replace(/^http/, "ws");
+  socket = new WebSocket(`${wsUrl}/ws/chat`);
+
+  socket.onopen = () => {
+    console.log("✅ WebSocket connected!");
+  };
+
+  socket.onmessage = (event: MessageEvent) => {
+    const data = JSON.parse(event.data);
+    console.log("--------",data);
+    onMessage(data);
+  };
+
+  socket.onclose = () => {
+    console.log("❌ WebSocket closed!");
+  };
+
+  socket.onerror = (err: Event) => {
+    console.error("WebSocket error:", err);
+  };
+};
+
+export const send_sms_ws = (message:string) =>{
+  console.log("inside the send sms");
+  if(socket && socket.readyState ===  WebSocket.OPEN){
+    console.log("ready for sending sms")
+    socket.send(JSON.stringify({"sms":message}))
+  }else{
+    console.warn("Websocket not connected!")
+  }
+}

@@ -23,14 +23,11 @@ function App() {
       </div>
 
       <div className="right-container">
-        <div className="right-container-top">
-          <div className="right-container-top-left">
-            <ChatScreen />
-          </div>
-          <div className="right-container-top-right"></div>
+        <div className="right-container-left">
+           <ChatScreen />
         </div>
-        <div className="right-container-bottom">
-            <InputBar />
+        <div className="right-container-right">
+            
         </div>
       </div>
     </div>

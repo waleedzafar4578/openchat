@@ -1,10 +1,13 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+// import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './pages.css';
 import Message from '../components/Message';
 import DateCard from '../components/DateCard';
 import { getMessages } from '../services/chat';
 import type { singleMessage } from '../commons/chatModels';
+import InputBar from '../elements/InputBar';
+import { connectWebSocket } from "../services/chat";
+
 
 interface Message {
   name: string;
@@ -13,9 +16,22 @@ interface Message {
   time: Date;
 }
 function ChatScreen() {
+  const [smsCount, setSmsCount] = useState<number>(0);
   const [dateHandler, setdateHandler] = useState<Date | null>(null);
   const [dateIndex, setDateIndex] = useState<number>(0);
   const [message, setMessage] = useState<singleMessage[]>([]);
+  const messageEndRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message])
+
+
+
+  useEffect(() => {
+    connectWebSocket((message) => {
+      setMessage((prev) => [...prev, message])
+    });
+  }, [smsCount]);
   useEffect(() => {
     const fetchMessages = async () => {
       const response = await getMessages(dateIndex, 0);
@@ -45,13 +61,19 @@ function ChatScreen() {
         {message.map((sms, index) => (
           <Message
             key={index}
-            name={String(sms.id)}
+            name={String(sms?.id)}
             color={"#FFF9E5"}
-            sms={sms.sms}
-            time={new Date(sms.created_at)}
+            sms={sms?.sms}
+            time={new Date(sms?.created_at)}
           />
+
         ))}
+        <div ref={messageEndRef}></div>
       </div>
+      {dateIndex === 0 && (
+        <InputBar doOnClick={() => setSmsCount(smsCount + 1)} />
+      )
+      }
     </div>
   )
 }

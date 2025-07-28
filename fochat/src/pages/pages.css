@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 95%;
+  height: 100%;
   overflow: hidden;
   align-items: center;
+  position: relative;
 }
 
 .chatscreen-container-messages {
@@ -16,8 +17,11 @@
   overflow: auto;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 15%;
 }
 
 .chatscreen-container-messages::-webkit-scrollbar {
   display: none;
 }
+
+.chatscreen-inputbar {}

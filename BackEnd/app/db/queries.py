@@ -28,7 +28,7 @@ def get_messages(message_no: int = 0, dateIndex: int = 0):
         query += " WHERE created_at::date = %s"
         params.append(queryDate)
 
-    query += " ORDER BY created_at DESC"
+    # query += " ORDER BY created_at DESC"
 
     # Add limit with fallback
     # limit_value = message_no if message_no > 0 else 3
