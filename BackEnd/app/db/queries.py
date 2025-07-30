@@ -19,7 +19,7 @@ def get_messages(message_no: int = 0, dateIndex: int = 0):
         f"After: check  date values-> QueryDate: {queryDate} ")
     # Lets build basic query
     query = """
-    SELECT id,sms,created_at FROM messages
+    SELECT name,sms,created_at FROM messages
      """
     params = []
 
@@ -48,7 +48,7 @@ def get_messages(message_no: int = 0, dateIndex: int = 0):
 
     cur.close()
     con.close()
-    return [{"id": r[0], "sms": r[1], "created_at": r[2]} for r in rows]
+    return [{"name": r[0], "sms": r[1], "created_at": r[2]} for r in rows]
 
 
 def post_sms(userSms: str):

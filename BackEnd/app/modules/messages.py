@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class MessageOut(BaseModel):
-    id: int
+    name: str
     sms: str
     created_at: datetime
 

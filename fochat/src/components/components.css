@@ -44,3 +44,57 @@
   color: #fff;
   font-size: 30px;
 }
+
+
+.user-profile-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.user-name-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.userlogin-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.userlogin-form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 80%;
+  background-color: #555879;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.input-bar-user {
+  margin-top: 20%;
+  padding: 5%;
+  font-size: 30px;
+  margin-bottom: 10%;
+}
+
+button {
+  background-color: #2F5249;
+  padding: 2%;
+  margin-bottom: 20%;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 30px;
+}

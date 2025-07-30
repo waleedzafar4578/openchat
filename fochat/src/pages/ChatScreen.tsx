@@ -7,6 +7,7 @@ import { getMessages } from '../services/chat';
 import type { singleMessage } from '../commons/chatModels';
 import InputBar from '../elements/InputBar';
 import { connectWebSocket } from "../services/chat";
+import { UNSAFE_ErrorResponseImpl } from 'react-router-dom';
 
 
 interface Message {
@@ -21,17 +22,25 @@ function ChatScreen() {
   const [dateIndex, setDateIndex] = useState<number>(0);
   const [message, setMessage] = useState<singleMessage[]>([]);
   const messageEndRef = useRef<HTMLDivElement | null>(null);
+  const [userName, setUserName] = useState<string>("");
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [message])
 
-
+  useEffect(() => {
+    let userInfo = localStorage.getItem("userInfo");
+    if (userInfo) {
+      setUserName(userInfo)
+    }
+  }, []);
 
   useEffect(() => {
     connectWebSocket((message) => {
       setMessage((prev) => [...prev, message])
     });
   }, [smsCount]);
+
+
   useEffect(() => {
     const fetchMessages = async () => {
       const response = await getMessages(dateIndex, 0);
@@ -56,12 +65,11 @@ function ChatScreen() {
           nextDate={() => setDateIndex(dateIndex - 1)}
         />
       )}
-
       <div className="chatscreen-container-messages">
         {message.map((sms, index) => (
           <Message
             key={index}
-            name={String(sms?.id)}
+            name={sms?.name}
             color={"#FFF9E5"}
             sms={sms?.sms}
             time={new Date(sms?.created_at)}

@@ -2,7 +2,7 @@
 type Status = "success" | "failed";
 
 interface singleMessage{
-  id:number;
+  name:string;
   sms:string;
   created_at:string;
 }
