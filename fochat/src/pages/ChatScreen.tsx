@@ -7,7 +7,7 @@ import { getMessages } from '../services/chat';
 import type { singleMessage } from '../commons/chatModels';
 import InputBar from '../elements/InputBar';
 import { connectWebSocket } from "../services/chat";
-import { UNSAFE_ErrorResponseImpl } from 'react-router-dom';
+
 
 
 interface Message {

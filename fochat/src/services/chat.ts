@@ -1,7 +1,7 @@
 
 import axios, { isAxiosError } from "axios";
-const url = import.meta.env.VITE_API_LOCAL_URL;
-
+export const url = import.meta.env.VITE_API_LOCAL_URL;
+export const wsUrl = url.replace(/^http/, "ws");
 
 import type { GetMessagesResponse } from '../commons/chatModels';
 
@@ -44,6 +44,9 @@ export const sendSms = async (userSms: string) => {
 type Callback = (message: any) => void;
 let socket: WebSocket | null = null;
 
+
+
+
 export const connectWebSocket = (onMessage: Callback) => {
   if (socket === null) {
     console.log("-Where start to connect with server using websocket!-")
@@ -69,8 +72,13 @@ export const connectWebSocket = (onMessage: Callback) => {
       let userInfo = data.userInfo;
       localStorage.setItem("userInfo", userInfo);
     }
+    else if (data.type === "userList") {
+      console.log("[onMessage][userList] inside the userlist",data?.data)
+      onMessage(data?.data)
+    }
     else {
-      onMessage(data);
+      console.log("[onMessage][Message] inside the else block.")
+      onMessage(data?.data);
     }
   };
 
