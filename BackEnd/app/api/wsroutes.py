@@ -84,6 +84,9 @@ async def websocket_chat(websocket: WebSocket):
     if userName in user_sessions.keys():
         show.info("[Chat socket] User already in this session.")
         pass
+    elif userName == "null":
+        show.info("[Error] UserName with null not allowed!")
+        return
     else:
         show.info(f"[Chat Socket]  Socket created for {userName}. ")
         user_sessions[userName] = websocket
@@ -105,7 +108,7 @@ async def websocket_chat(websocket: WebSocket):
                 created_at=datetime.today()
             )
             response = {
-                "type": "message",
+                "type": "messages",
                 "data": data
             }
             for user in user_sessions:

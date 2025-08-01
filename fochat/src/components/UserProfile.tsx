@@ -1,15 +1,16 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useContext } from "react";
 import './components.css';
-import React from "react";
+import { WebSocketContext } from "../context/WsContext";
+
 function UserProfile() {
-  const [userName, setUserName] = useState<string | null>(null);
-  useEffect(() => {
-    let name = localStorage.getItem("userInfo");
-    setUserName(name != null ? name : null)
-  }, []);
+  const context = useContext(WebSocketContext);
+  if (!context) {
+    throw new Error("[Error] WebSocket values is not provided!")
+  }
+  const { userName } = context;
   return (
     <div className="user-name-container">
-      <p>{userName !== null ? userName : "temp"}</p>
+      <p className="user-name-item">{userName}</p>
     </div>
   )
 }

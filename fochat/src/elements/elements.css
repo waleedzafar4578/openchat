@@ -27,9 +27,8 @@
   scrollbar-width: none;
   display: flex;
   flex-direction: column;
-  flex: 0 0 95%;
   width: 95%;
-  /* height: 100%; */
+  height: 100%;
   /* background-color: #fff; */
   padding: 2px;
 }
@@ -42,20 +41,28 @@ ul {
 
 .single-user {
   width: 100%;
-  height: 10%;
-  border-radius: 2px;
+  background-color: #EEEEEE;
+  padding: 1%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.9%;
 }
 
 .inputbar-container {
   position: absolute;
   bottom: 3%;
-  height: 10%;
+  height: auto;
   width: 90%;
+  flex-grow: 1;
   display: flex;
   padding: 0.2rem;
   overflow: hidden;
   border-radius: 15px;
   background-color: #555879;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .input-bar {
@@ -64,10 +71,12 @@ ul {
   /* height: 90%; */
 }
 
-input {
+textarea {
   all: unset;
   font-size: 25px;
   color: #fff;
+  overflow: hidden;
+  resize: none;
 }
 
 .inputbar-button {
@@ -82,6 +91,9 @@ input {
   justify-content: center;
   align-items: center;
   background-color: #98A1BC;
+  scale: 1;
+  transition: 1s;
+
 }
 
 .inputbar-button-container {
@@ -90,5 +102,23 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
 
+.inputbar-button:hover {
+  scale: 1.1;
+  transition: 1s;
+}
+
+.word-counter {
+  position: absolute;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  background-color: #fff;
+  width: 100%;
+  height: 1px;
+  top: 0;
+  font-size: 10px;
+  transition-duration: 0.3s;
 }

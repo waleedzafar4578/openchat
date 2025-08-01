@@ -1,13 +1,13 @@
 // import React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import './pages.css';
 import Message from '../components/Message';
 import DateCard from '../components/DateCard';
 import { getMessages } from '../services/chat';
 import type { singleMessage } from '../commons/chatModels';
 import InputBar from '../elements/InputBar';
-import { connectWebSocket } from "../services/chat";
-
+// import { connectWebSocket } from "../services/chat";
+import { WebSocketContext } from '../context/WsContext';
 
 
 interface Message {
@@ -22,23 +22,29 @@ function ChatScreen() {
   const [dateIndex, setDateIndex] = useState<number>(0);
   const [message, setMessage] = useState<singleMessage[]>([]);
   const messageEndRef = useRef<HTMLDivElement | null>(null);
-  const [userName, setUserName] = useState<string>("");
+  const context = useContext(WebSocketContext);
+  if (!context) {
+    throw new Error("Websocket Context is not provided!");
+  };
+
+  const { messages } = context;
+
+
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [message])
 
   useEffect(() => {
-    let userInfo = localStorage.getItem("userInfo");
-    if (userInfo) {
-      setUserName(userInfo)
+    if (dateIndex === 0) {
+      setMessage((prev) => [...prev, messages])
     }
-  }, []);
+  }, [messages]);
 
-  useEffect(() => {
-    connectWebSocket((message) => {
-      setMessage((prev) => [...prev, message])
-    });
-  }, [smsCount]);
+  // useEffect(() => {
+  //   connectWebSocket((message) => {
+  //     setMessage((prev) => [...prev, message])
+  //   });
+  // }, [smsCount]);
 
 
   useEffect(() => {
@@ -51,7 +57,6 @@ function ChatScreen() {
       }
 
     }
-
     fetchMessages();
   }, [dateIndex]);
 

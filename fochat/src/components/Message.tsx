@@ -16,7 +16,7 @@ function Message({ name, color, sms, time }: MessageProps) {
         <div> {time.toLocaleTimeString()} </div>
       </div>
       <div className="message-container-body">
-        <p>{sms}</p>
+        <p className="item">{sms}</p>
       </div>
     </div>
   )

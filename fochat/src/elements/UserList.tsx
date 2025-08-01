@@ -1,35 +1,29 @@
-import { useState, useEffect } from "react";
-import { connectWebSocket } from "../services/chat";
+import { useContext } from "react";
+import { WebSocketContext } from "../context/WsContext";
+import "./elements.css";
 
-
-interface User {
-  color: string;
-  name: string;
-}
 function UserList() {
-
-  const [users, setUsers] = useState<any | null>(null);
-  useEffect(() => {
-    console.log("[Userlist][useEffect]")
-    connectWebSocket((user) => {
-     setUsers((prev: any) => [...prev, user])
-    });
-
-  }, []);
+  const context = useContext(WebSocketContext);
+  if (!context) {
+    throw new Error("Websocket values not provided!");
+  }
+  const { allConnectUser, userName } = context;
   return (
     <div className="user-container">
-      {users != null && (
+      {allConnectUser != null && (
         <ul>
-          {users.map((user, index) => (
-            <li key={index} style={{ backgroundColor: "#fff" }} className="single-user">
-              {user}
-            </li>
+          {allConnectUser.map((user, index) => (
+            <div>
+              {userName != user && (
+                <li key={index} className="single-user">
+                  <p>{user}</p>
+                </li>
+              )}
+            </div>
           ))}
         </ul>
       )}
     </div>
   )
 }
-
-
 export default UserList;
