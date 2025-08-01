@@ -39,9 +39,11 @@ function InputBar({ doOnClick }: { doOnClick: () => void }) {
         onKeyDown={handleKeydown}
         placeholder="Chalo! tum apni luch taalo."
       />
-      <div className="inputbar-button-container">
-        <div onClick={sendtoMessage} className="inputbar-button">{syb}</div>
-      </div>
+      {smsText.length < 100 && (
+        <div className="inputbar-button-container">
+          <div onClick={sendtoMessage} className="inputbar-button">{syb}</div>
+        </div>
+      )}
       <div className="word-counter" style={{
         width: `${smsText.length}%`,
         backgroundColor: smsText.length > 90 ? "#B9375D" : "#fff"
