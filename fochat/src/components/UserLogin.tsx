@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import "./components.css"
-
+import type { ChangeEvent } from "react";
 
 function UserLogin() {
   const [userName, setUserName] = useState("");

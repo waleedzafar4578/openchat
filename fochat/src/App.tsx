@@ -24,7 +24,8 @@ function App() {
     }, 3000);
 
   }, [log]);
-
+  const [mobileScreen, setMobileScreen] = useState(true);
+  const [width, setWidth] = useState("0");
   const leave = () => {
     setUserLogout()
   }
@@ -39,9 +40,20 @@ function App() {
             <div className='leave-button' onClick={leave}>
               <p>🚨</p>
             </div>
-            <div className="left-container">
+            {mobileScreen && (
+              <div className='left-list-open' onClick={() => {
+                setWidth("0");
+                setMobileScreen(false);
+              }}>
+                <DashboardIcon />
+              </div>
+            )}
+            <div className="left-container" style={{ left: `${width}%` }}>
               <div className="left-container-top">
-                <div className="left-container-top-top">
+                <div className="left-container-top-top" onClick={() => {
+                  setWidth("-20");
+                  setMobileScreen(true);
+                }}>
                   <DashboardIcon />
                 </div>
                 <div className="left-container-top-bottom">

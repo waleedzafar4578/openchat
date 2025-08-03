@@ -1,4 +1,4 @@
-// import React from 'react';
+
 import { useContext, useEffect, useRef, useState } from 'react';
 import './pages.css';
 import Message from '../components/Message';
@@ -36,8 +36,9 @@ function ChatScreen() {
 
   useEffect(() => {
     if (dateIndex === 0) {
+      if(messages != null){
       setMessage((prev) => [...prev, messages])
-    }
+    }}
   }, [messages]);
 
   // useEffect(() => {

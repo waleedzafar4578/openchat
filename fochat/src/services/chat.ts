@@ -1,4 +1,3 @@
-
 import axios, { isAxiosError } from "axios";
 export const url = import.meta.env.VITE_API_LOCAL_URL;
 export const wsUrl = url.replace(/^http/, "ws");

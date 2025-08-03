@@ -137,3 +137,18 @@ left-conatiner                 |
   left: 80%;
   border-radius: 20px;
 }
+
+@media(max-width:600px) {
+  .right-container-right {
+    display: none;
+    /* width: 1%; */
+  }
+
+  .right-container-left {
+    width: 100%;
+  }
+
+  .notification {
+    padding: 0.1%;
+  }
+}

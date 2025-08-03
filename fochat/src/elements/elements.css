@@ -93,7 +93,6 @@ textarea {
   background-color: #98A1BC;
   scale: 1;
   transition: 1s;
-
 }
 
 .inputbar-button-container {
@@ -108,6 +107,19 @@ textarea {
 .inputbar-button:hover {
   scale: 1.1;
   transition: 1s;
+}
+
+
+@media (max-width:600px) {
+
+  textarea,
+  .inputbar-button {
+    font-size: 15px;
+  }
+
+  .inputbar-button-container {
+    height: 60%;
+  }
 }
 
 .word-counter {

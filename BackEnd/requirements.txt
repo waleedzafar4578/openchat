@@ -7,4 +7,3 @@ fastapi[all]
 python-multipart
 aiofiles
 requests
-startlette
