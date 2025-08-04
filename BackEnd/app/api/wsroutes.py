@@ -108,9 +108,8 @@ async def websocket_chat(websocket: WebSocket):
             show.info(f"[Chat socket loop] Reciev SMS from user with socket {
                       websocket} which related to the username: {userName} data which revieve:{data_str}")
             data = json.loads(data_str)
-            print("===================================>", data["date"])
             chache_sms(userName, data['sms'], data["date"])
-            if len(sms_chache) > len(user_sessions) :
+            if len(sms_chache) > len(user_sessions):
                 flush_sms_to_db()
             data = MessageOut(
                 name=userName,

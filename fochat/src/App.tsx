@@ -29,7 +29,7 @@ function App() {
   const leave = () => {
     setUserLogout()
   }
-  const sybl = ["<",">"];
+  const sybl = ["<", ">"];
   return (
     <WebSocketProvider>
       <div className="container">
@@ -44,7 +44,7 @@ function App() {
             {(window.innerWidth < 601 ? true : false) && (mobileScreen) && (
               <div className='left-list-open' onClick={() => {
                 setWidth("0");
-                 setMobileScreen(false);
+                setMobileScreen(false);
               }}>
                 <p className='open-nav'>{sybl[1]}</p>
               </div>

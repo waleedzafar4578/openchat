@@ -1,5 +1,5 @@
 import './elements.css';
-import icon from '../assets/dashboard.png';
+import icon from '../assets/dashbord.jpeg';
 
 function DashboardIcon(){
   return(
