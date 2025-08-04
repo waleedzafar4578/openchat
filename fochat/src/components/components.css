@@ -1,5 +1,13 @@
+@import "../appColors.css";
+
+.message-parent-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
 .message-container {
-  width: 80%;
+  width: 70%;
   height: auto;
   padding: 1rem;
   padding-top: 0;
@@ -7,35 +15,22 @@
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* flex-wrap: wrap; */
-  /* border: 0.3px solid #fff; */
-  scale: 1;
-  transition: 1s;
+  background-color: var(--messageContainerBackground);
 }
 
-/* .message-container:hover { */
-/* scale: 1.1; */
-/* transition: 1s; */
-/* } */
-
 .message-container-header {
-  /* flex: 1 1 auto; */
-  color: #898AC4;
+  color: var(--messageContainerHeaderColor);
   display: flex;
   justify-content: space-between;
   width: 100%;
-  /* border: 1px solid #fff; */
 }
 
 .message-container-body {
-  /* flex: 1 0 auto; */
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
   height: 90%;
-  /* border: 1px solid #fff; */
 }
 
 .item {
@@ -48,17 +43,18 @@
   width: 100%;
   margin: 1rem;
   justify-content: center;
+  padding-top: 1%;
 }
 
 .date-container-date {
-  background-color: #393E46;
+  background-color: var(--dateContainerBackground);
   padding: 0.5rem;
   padding-bottom: 0.01rem;
   padding-top: 0.01rem;
   border-radius: 0.5rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-  color: #fff;
+  color: var(--dateContainerColor);
   font-size: 30px;
 }
 
@@ -92,17 +88,22 @@
   width: 100%;
   justify-content: center;
   align-items: center;
-  /* background-color: #fff; */
 }
 
 .user-name-item {
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #fff;
-  border: 5px solid #FFD700;
-  color: #FFD700;
-  font-weight: 500;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.9%;
+  width: 100%;
+  padding: 1%;
+  height: 50%;
+  border-radius: 5px;
+  background-color: var(--userNameItemBackground);
+  border: 1px solid var(--userNameItemBorderColor);
+  color: var(--userNameItemColor);
+  font-style: bold;
+  font-weight: 900;
 }
 
 .userlogin-container {
@@ -118,7 +119,7 @@
   flex-direction: column;
   width: 60%;
   height: 40%;
-  background-color: #DBE4C9;
+  background-color: var(--userLoginFormBackground);
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -130,47 +131,25 @@ input {
 }
 
 .input-bar-user {
-  background-color: #fff;
+  background-color: var(--userInputBarBackground);
   margin-top: 20%;
   padding: 0.3%;
   border-radius: 5px;
-  /* font-size: 30px; */
   margin-bottom: 10%;
 }
 
 button {
-  background-color: #2F5249;
+  background-color: var(--buttonBackground);
   padding: 2%;
   margin-bottom: 20%;
   border: none;
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 10px;
-  color: #fff;
+  color: var(--buttonColor);
   font-size: 30px;
 }
 
-
-.leave-button {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  right: 0;
-  top: 0;
-  background-color: #fff;
-  margin: 1.3%;
-  scale: 1;
-  transition: 1s;
-}
-
-.leave-button:hover {
-  scale: 1.3;
-  transition: 1s;
-}
 
 @media (max-width:600px) {
   .userlogin-container {
@@ -187,37 +166,6 @@ button {
     padding: 1rem;
   }
 
-  .leave-button {
-    height: 25px;
-    width: 25px;
-  }
-
-  .left-container {
-    display: flex;
-    position: absolute;
-    width: 0%;
-    height: 100%;
-    z-index: 100;
-    background-color: #57564F;
-    width: 20%;
-    left: -20%;
-    border-radius: 20px;
-    transition: 1s;
-  }
 
 
-}
-
-@media(max-width:600px) {
-  .left-list-open {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    left: 10px;
-    top: 10px;
-    transition: 1s;
-  }
 }

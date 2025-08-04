@@ -18,7 +18,7 @@ from app.utils.logging import getLogger
 
 # Create the Router for config the endpoints the address.
 ws_router = APIRouter()
-
+ws_api_router = APIRouter()
 # Create logger handle for call there functions.
 show = getLogger()
 
@@ -71,12 +71,21 @@ def flush_sms_to_db():
 # User Sessions use for store all users which connected with websocket.
 user_sessions = {}
 
+# Get Connected user, check new user name will not be same
+
+
+@ws_api_router.get("/connected_users")
+async def connect_user():
+    print("connected User api call:")
+    res = list(user_sessions.keys())
+    print(res)
+    return jsonable_encoder(res)
 # Chat socket provide users to communicate with all others.Kind of group chat.
 
 
 @ws_router.websocket("/ws/chat")
 async def websocket_chat(websocket: WebSocket):
-    # Accept the socket request then fetch userinfo for check if this user already connect or not.
+    # Accept the socket request then fetch userinfo for check if this use
     # If user come first time then store his name along socket address.
     await websocket.accept()
     userName = websocket.query_params.get("userInfo")
@@ -99,8 +108,9 @@ async def websocket_chat(websocket: WebSocket):
             show.info(f"[Chat socket loop] Reciev SMS from user with socket {
                       websocket} which related to the username: {userName} data which revieve:{data_str}")
             data = json.loads(data_str)
-            chache_sms(userName, data['sms'], datetime.today())
-            if len(user_sessions) < 2 or len(sms_chache) >= 3:
+            print("===================================>", data["date"])
+            chache_sms(userName, data['sms'], data["date"])
+            if len(sms_chache) > len(user_sessions) :
                 flush_sms_to_db()
             data = MessageOut(
                 name=userName,

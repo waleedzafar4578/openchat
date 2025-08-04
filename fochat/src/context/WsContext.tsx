@@ -35,6 +35,7 @@ const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
   const setUserLogin = (name: string) => {
     localStorage.setItem("userInfo", name);
     setUserName(name);
+    location.reload();
   }
   const setUserLogout = () => {
     if (ws) {
@@ -130,7 +131,9 @@ const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
       setLog("[Error] UserName is not Set yet!");
       return;
     }
+    const date=new Date();
     let request = {
+      "date": date.toString(),
       "sms": message,
       "userInfo": userName
     };

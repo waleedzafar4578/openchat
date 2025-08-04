@@ -1,0 +1,26 @@
+:root {
+  --common: #386641;
+  --appBackground: #FAF9EE;
+  --leftContainerBackgroundColor: var(--common);
+  --notificationBackground: #F1F0E4;
+  --messageContainerBackground: #DDDAD0;
+  --messageContainerHeaderColor: var(--common);
+  --dateContainerBackground: var(--common);
+  --dateContainerColor: #fff;
+  --userNameItemBackground: #EEEEEE;
+  --userNameItemColor: #386641;
+  --userNameItemBorderColor: var(--common);
+  --userLoginFormBackground: #DBE4C9;
+  --userInputBarBackground: #fff;
+  --buttonBackground: #2F5249;
+  --buttonColor: #fff;
+  --leaveButtonBackground: #fff;
+  --singleUserBackground: #EEEEEE;
+  --singleUserBorderColor: var(--common);
+  --inputbarContainerBackground: var(--common);
+  --textareaColor: #fff;
+  --textareaBackground: none;
+  --inputbarButtonColor: var(--common);
+  --inputbarButtonBackground: #fff;
+  --wordCounterBackground: var(--common);
+}

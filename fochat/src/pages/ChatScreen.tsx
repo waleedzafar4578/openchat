@@ -12,7 +12,7 @@ import { WebSocketContext } from '../context/WsContext';
 
 interface Message {
   name: string;
-  color: string;
+  align: string;
   sms: string;
   time: Date;
 }
@@ -27,7 +27,7 @@ function ChatScreen() {
     throw new Error("Websocket Context is not provided!");
   };
 
-  const { messages } = context;
+  const { messages,userName } = context;
 
 
   useEffect(() => {
@@ -41,13 +41,7 @@ function ChatScreen() {
     }}
   }, [messages]);
 
-  // useEffect(() => {
-  //   connectWebSocket((message) => {
-  //     setMessage((prev) => [...prev, message])
-  //   });
-  // }, [smsCount]);
-
-
+  
   useEffect(() => {
     const fetchMessages = async () => {
       const response = await getMessages(dateIndex, 0);
@@ -64,6 +58,7 @@ function ChatScreen() {
 
   return (
     <div className="chatscreen-container">
+      <div className='chatscreen-container-date'>
       {dateHandler != null && (
         <DateCard
           date={dateHandler.toDateString()}
@@ -71,12 +66,13 @@ function ChatScreen() {
           nextDate={() => setDateIndex(dateIndex - 1)}
         />
       )}
+      </div>
       <div className="chatscreen-container-messages">
         {message.map((sms, index) => (
           <Message
             key={index}
-            name={sms?.name}
-            color={"#FFF9E5"}
+            name={sms?.name === userName? "You" : sms?.name}
+            align={userName===sms?.name ? "center" :"flex-end"}
             sms={sms?.sms}
             time={new Date(sms?.created_at)}
           />

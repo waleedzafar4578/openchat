@@ -4,7 +4,15 @@ export const wsUrl = url.replace(/^http/, "ws");
 
 import type { GetMessagesResponse } from '../commons/chatModels';
 
-
+export const connected_userlist = async()=>{
+  try{
+    const response = await axios.get(`${url}/connected_users`)
+    // console.log("Connected_user",response.data)
+    return response.data;
+  }catch(error:any){
+    console.log("[Error]:",error)
+  }
+}
 export const getMessages = async (dateIndex = 0, messagesLimit = 0) => {
   try {
 

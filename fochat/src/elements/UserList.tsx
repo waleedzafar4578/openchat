@@ -10,12 +10,15 @@ function UserList() {
   const { allConnectUser, userName } = context;
   return (
     <div className="user-container">
+      <p style={{
+        color:'#D92C54'
+      }}>Connected Users</p>
       {allConnectUser != null && (
         <ul>
           {allConnectUser.map((user, index) => (
-            <div>
+            <div key={index}>
               {userName != user && (
-                <li key={index} className="single-user">
+                <li className="single-user">
                   <p>{user}</p>
                 </li>
               )}

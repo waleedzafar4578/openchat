@@ -24,11 +24,12 @@ function App() {
     }, 3000);
 
   }, [log]);
-  const [mobileScreen, setMobileScreen] = useState(true);
+  const [mobileScreen, setMobileScreen] = useState(false);
   const [width, setWidth] = useState("0");
   const leave = () => {
     setUserLogout()
   }
+  const sybl = ["<",">"];
   return (
     <WebSocketProvider>
       <div className="container">
@@ -40,21 +41,29 @@ function App() {
             <div className='leave-button' onClick={leave}>
               <p>🚨</p>
             </div>
-            {mobileScreen && (
+            {(window.innerWidth < 601 ? true : false) && (mobileScreen) && (
               <div className='left-list-open' onClick={() => {
                 setWidth("0");
-                setMobileScreen(false);
+                 setMobileScreen(false);
               }}>
-                <DashboardIcon />
+                <p className='open-nav'>{sybl[1]}</p>
               </div>
             )}
             <div className="left-container" style={{ left: `${width}%` }}>
               <div className="left-container-top">
                 <div className="left-container-top-top" onClick={() => {
-                  setWidth("-20");
-                  setMobileScreen(true);
+                  if (window.innerWidth < 601) {
+                    setWidth("-20");
+                    setMobileScreen(true);
+                  }
                 }}>
-                  <DashboardIcon />
+                  {window.innerWidth < 601 ? (
+                    <div className='close-nav-container'>
+                      <p className='close-nav'>{sybl[0]}</p>
+                    </div>
+                  ) : (
+                    <DashboardIcon />
+                  )}
                 </div>
                 <div className="left-container-top-bottom">
                   <UserList />
