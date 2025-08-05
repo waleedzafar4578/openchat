@@ -11,7 +11,7 @@ function UserList() {
   return (
     <div className="user-container">
       <p style={{
-        color:'#D92C54'
+        color:'#fff'
       }}>Connected Users</p>
       {allConnectUser != null && (
         <ul>

@@ -11,11 +11,12 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from fastapi.encoders import jsonable_encoder
 from app.modules.messages import MessageOut
-from datetime import datetime
+from app.modules.APIResponse import APIResponse
 import json
 from app.db.sessions import get_db_connection
 from app.utils.logging import getLogger
-
+from app.utils.DateTime import camparedDate
+from app.db.queries import get_messages
 # Create the Router for config the endpoints the address.
 ws_router = APIRouter()
 ws_api_router = APIRouter()
@@ -80,6 +81,21 @@ async def connect_user():
     res = list(user_sessions.keys())
     print(res)
     return jsonable_encoder(res)
+
+
+@ws_api_router.get("/get", response_model=APIResponse)
+async def fetch_messages(message_no: int, dateIndex: int):
+    collectiveData = []
+    collectiveData += get_messages(message_no, dateIndex)
+    if len(sms_chache) > 0 and dateIndex == 0:
+        collectiveData += sms_chache
+    return APIResponse(
+        status="success",
+        dataDate=camparedDate(dateIndex),
+        data=collectiveData
+    )
+
+
 # Chat socket provide users to communicate with all others.Kind of group chat.
 
 
@@ -101,7 +117,10 @@ async def websocket_chat(websocket: WebSocket):
         user_sessions[userName] = websocket
 
     await send_user_list()
-    # Then user come in loop it send and recieve text in this loop.Until user disconnect then loop break and flush the sms into database.Then remove that client from the user sessions.
+    await send_chache_sms_to_user(userName)
+    # Then user come in loop it send and recieve text in this loop.Until user
+    # disconnect then loop break and flush the sms into database.
+    # Then remove that client from the user sessions.
     try:
         while True:
             data_str = await websocket.receive_text()
@@ -109,12 +128,12 @@ async def websocket_chat(websocket: WebSocket):
                       websocket} which related to the username: {userName} data which revieve:{data_str}")
             data = json.loads(data_str)
             chache_sms(userName, data['sms'], data["date"])
-            if len(sms_chache) > len(user_sessions):
+            if len(sms_chache) > len(user_sessions) or len(sms_chache) > 5:
                 flush_sms_to_db()
             data = MessageOut(
                 name=userName,
                 sms=data['sms'],
-                created_at=datetime.today()
+                created_at=data['date']
             )
             response = {
                 "type": "messages",
@@ -140,3 +159,15 @@ async def send_user_list():
         await user_sessions[user].send_json(jsonable_encoder(response), mode="text")
 
     show.info("[Send User List] send user name list to all connected user.")
+
+
+async def send_chache_sms_to_user(user: str):
+    show.info("[Success] Chache Sms sent!")
+    bluk_sms = {
+        "type": "chacheSms",
+        "data": sms_chache
+    }
+    try:
+        await user_sessions[user].send_json(jsonable_encoder(bluk_sms), mode="text")
+    except:
+        show.info("[Error] Selected user is not exist!")

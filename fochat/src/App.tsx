@@ -24,8 +24,8 @@ function App() {
     }, 3000);
 
   }, [log]);
-  const [mobileScreen, setMobileScreen] = useState(false);
-  const [width, setWidth] = useState("0");
+  const [mobileScreen, setMobileScreen] = useState(true);
+  const [width, setWidth] = useState("-20");
   const leave = () => {
     setUserLogout()
   }

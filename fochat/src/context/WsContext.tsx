@@ -11,6 +11,7 @@ interface WebSocketContextValues {
   setUserLogin: (name: string) => void;
   setUserLogout: () => void;
   messages: singleMessage | null;
+  reconnect: () => void;
 };
 
 const WebSocketContext = createContext<WebSocketContextValues | null>(null);
@@ -21,6 +22,7 @@ const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
   const [log, setLog] = useState<string | null>(null);
   const [allConnectUser, setAllConnectUser] = useState<string[] | null>(null);
   const [messages, setMessages] = useState<singleMessage | null>(null);
+
 
   const fetchUserName = () => {
     const name = localStorage.getItem("userInfo");
@@ -37,6 +39,16 @@ const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
     setUserName(name);
     location.reload();
   }
+  const reconnect = () => {
+    console.log("inside the reconnect")
+    if (ws === null) {
+      console.log("call the reconnect fucntion")
+      connectWebSocket();
+    }
+  }
+
+
+
   const setUserLogout = () => {
     if (ws) {
       ws?.close()
@@ -62,16 +74,16 @@ const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
 
   const connectWebSocket = () => {
     if (ws) {
-      setLog("[Warn] WebSocket Already Connected!");
+      console.log("[Warn] WebSocket Already Connected!");
       return;
     };
     const socket = new WebSocket(`${wsUrl}/ws/chat?userInfo=${userName}`);
     socket.onopen = () => {
       setWs(socket);
-      setLog("[Success] WebSocket is open!");
+      console.log("[Success] WebSocket is open!");
     }
     socket.onmessage = (event: MessageEvent) => {
-      setLog("[success] Message recieved from server!")
+      console.log("[success] Message recieved from server!")
       const recievedData = JSON.parse(event.data);
       console.log("[Recieve Data from server]", recievedData);
       switch (recievedData?.type) {
@@ -88,11 +100,11 @@ const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
       }
     }
     socket.onclose = () => {
-      setLog("[Warn] Socket is closed!");
+      console.log("[Warn] Socket is closed!");
       setWs(null);
     }
     socket.onerror = (err: Event) => {
-      setLog(`[Error] Socket produced error:${err}`);
+      console.log(`[Error] Socket produced error:${err}`);
     }
   };
   useEffect(() => {
@@ -131,9 +143,9 @@ const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
       setLog("[Error] UserName is not Set yet!");
       return;
     }
-    const date=new Date();
+
     let request = {
-      "date": date.toString(),
+      "date": getPostgresDateString(),
       "sms": message,
       "userInfo": userName
     };
@@ -142,7 +154,7 @@ const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
 
 
   return (
-    <WebSocketContext.Provider value={{ ws, userName, setUserLogin, messages, log, allConnectUser, sendMessage, setUserLogout }}>
+    <WebSocketContext.Provider value={{ ws, userName, setUserLogin, messages, log, allConnectUser, sendMessage, setUserLogout, reconnect }}>
       {children}
     </WebSocketContext.Provider>
   )
@@ -150,3 +162,15 @@ const WebSocketProvider = ({ children }: { children: React.ReactNode }) => {
 
 
 export { WebSocketContext, WebSocketProvider }
+
+
+function getPostgresDateString(date = new Date()) {
+  const pad = (n: any) => n.toString().padStart(2, '0');
+  const year = date.getFullYear();
+  const month = pad(date.getMonth() + 1);
+  const day = pad(date.getDate());
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+  const seconds = pad(date.getSeconds());
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}

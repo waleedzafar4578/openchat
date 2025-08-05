@@ -35,9 +35,11 @@ svg {
 
 input,
 button,
+p,
 textarea,
 select {
   font: inherit;
+  cursor: pointer;
 }
 
 

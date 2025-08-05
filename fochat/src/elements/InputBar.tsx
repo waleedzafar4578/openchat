@@ -4,7 +4,7 @@ import './elements.css';
 import { WebSocketContext } from "../context/WsContext";
 
 function InputBar({ doOnClick }: { doOnClick: () => void }) {
-  const syb = ">";
+  const syb = ["📤", "🔌"];
   const [smsText, setSmsText] = useState<string>("");
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setSmsText(e.target.value)
@@ -15,9 +15,13 @@ function InputBar({ doOnClick }: { doOnClick: () => void }) {
     throw new Error("WebSocket Valuse not provided!");
   }
 
-  const { sendMessage } = context;
+  const { sendMessage, ws,reconnect } = context;
 
   const sendtoMessage = () => {
+    if(ws ===null){
+      reconnect()
+      return
+    }
     if (smsText.trim()) {
       sendMessage(smsText);
       setSmsText("")
@@ -33,15 +37,18 @@ function InputBar({ doOnClick }: { doOnClick: () => void }) {
   return (
     <div className="inputbar-container">
       <textarea
+        disabled={ws === null ? true : false}
         value={smsText}
         onChange={handleChange}
         className="input-bar"
         onKeyDown={handleKeydown}
-        placeholder="Chalo! tum apni luch taalo."
+        placeholder={ws === null ? "Bhai isko connect krly,moo utha kr betha hi" : "Chalo! tum apni luch taalo."}
       />
       {smsText.length < 100 && (
-        <div className="inputbar-button-container">
-          <div onClick={sendtoMessage} className="inputbar-button">{syb}</div>
+        <div className="inputbar-button-container" >
+          <div onClick={sendtoMessage} className="inputbar-button" style={{
+            backgroundColor: ws === null ? "#E14434" : "#fff"
+          }}>{ws === null ? syb[1] : [syb[0]]}</div>
         </div>
       )}
       <div className="word-counter" style={{

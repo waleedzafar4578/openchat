@@ -41,22 +41,25 @@
 .date-container {
   display: flex;
   width: 100%;
+  height: 20%;
   margin: 1rem;
   justify-content: center;
   padding-top: 1%;
 }
 
 .date-container-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: var(--dateContainerBackground);
-  padding: 0.5rem;
-  padding-bottom: 0.01rem;
-  padding-top: 0.01rem;
+  padding: 0.7rem;
   border-radius: 0.5rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   color: var(--dateContainerColor);
-  font-size: 30px;
 }
+
+
 
 @media (max-width:600px) {
   .date-container {
@@ -64,7 +67,9 @@
   }
 
   .date-container-date {
-    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .item {
