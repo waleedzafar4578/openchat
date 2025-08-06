@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./elements.css";
 function Timer({ changer, timeLimit,outerSec }:
   { changer: () => void, timeLimit: number, outerSec:()=>void }) {
