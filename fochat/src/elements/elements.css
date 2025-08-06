@@ -103,6 +103,25 @@ textarea {
 }
 
 
+.timer-container {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+textarea::placeholder {
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-counter {
+  color: var(--common);
+}
+
 @media (max-width:600px) {
 
   textarea,
